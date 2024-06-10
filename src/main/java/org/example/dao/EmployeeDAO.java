@@ -25,7 +25,7 @@ public class EmployeeDAO {
 
     public void INSERT_EMPLOYEE(Employees employee) throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\dev\\IdeaProjects\\JavaCourse\\src\\main\\java\\Day4\\hr.db");
+        Connection conn = DriverManager.getConnection(URL);
         PreparedStatement st = conn.prepareStatement("insert into employees values (?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
         st.setInt(1, employee.getEmployeesId());
         st.setString(2, employee.getFirstName());
@@ -42,7 +42,7 @@ public class EmployeeDAO {
 
     public void UPDATE_EMPLOYEE(Employees employee) throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\dev\\IdeaProjects\\JavaCourse\\src\\main\\java\\Day4\\hr.db");
+        Connection conn = DriverManager.getConnection(URL);
         PreparedStatement st = conn.prepareStatement("update employees set first_name = ?, last_name = ?, email = ? , phone_number = ? , hire_date = ? , job_id = ? , salary = ? , manager_id = ? , department_id = ?  where employee_id = ?");
         st.setInt(1, employee.getEmployeesId());
         st.setString(2, employee.getFirstName());
@@ -59,7 +59,7 @@ public class EmployeeDAO {
 
     public void DELETE_EMPLOYEE(int employee_id) throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\dev\\IdeaProjects\\JavaCourse\\src\\main\\java\\Day4\\hr.db");
+        Connection conn = DriverManager.getConnection(URL);
         PreparedStatement st = conn.prepareStatement("delete from employees where employee_id = ?");
         st.setInt(1, employee_id);
         st.executeUpdate();
@@ -67,7 +67,7 @@ public class EmployeeDAO {
 
     public Employees selectEmployee(int employee_id) throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\dev\\IdeaProjects\\JavaCourse\\src\\main\\java\\Day4\\hr.db");
+        Connection conn = DriverManager.getConnection(URL);
         PreparedStatement st = conn.prepareStatement("select * from employees where employee_id = ?");
         st.setInt(1, employee_id);
         ResultSet rs = st.executeQuery();
@@ -76,7 +76,7 @@ public class EmployeeDAO {
 
     public ArrayList<Employees> SELECT_ALL_EMPLOYEES() throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\dev\\IdeaProjects\\JavaCourse\\src\\main\\java\\Day4\\hr.db");
+        Connection conn = DriverManager.getConnection(URL);
         PreparedStatement st = conn.prepareStatement("select * from employees");
         ResultSet rs = st.executeQuery();
         ArrayList<Employees> Employee = new ArrayList();
@@ -86,5 +86,14 @@ public class EmployeeDAO {
         }
 
         return Employee;
+    }
+
+    public Employees SELECT_EMPLOEE_NAME(String first_name) throws SQLException, ClassNotFoundException {
+        Class.forName("org.sqlite.JDBC");
+        Connection conn = DriverManager.getConnection(URL);
+        PreparedStatement st = conn.prepareStatement("select * from employees where employee_id = ?");
+        st.setString(1, first_name);
+        ResultSet rs = st.executeQuery();
+        return rs.next() ? new Employees(rs) : null;
     }
 }

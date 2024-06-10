@@ -2,10 +2,11 @@ package org.example.dao;
 
 import org.example.models.Jobs;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class JobsDAO {
+public class JobsDAO implements Serializable {
 
 
     private static final String URL = "jdbc:sqlite:C:\\Users\\dev\\IdeaProjects\\HrApiDay10-EV\\src\\main\\java\\org\\example\\hr.db";

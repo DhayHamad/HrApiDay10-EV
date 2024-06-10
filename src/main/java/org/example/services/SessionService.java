@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.ws.rs.Path;
 
 import java.io.Serializable;
 

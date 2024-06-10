@@ -23,6 +23,7 @@ public class JobsController {
     @Context UriInfo uriInfo;
     @Context HttpHeaders headers;
 
+
     @GET
     public Response SELECT_ALL_JOBS(
             @BeanParam JobFilterDto filter
